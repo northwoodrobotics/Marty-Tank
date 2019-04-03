@@ -7,14 +7,32 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
 
 /**
  * An example subsystem. You can replace me with your own Subsystem.
  */
 public class Drivetrain extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
+  public VictorSP leftFront = new VictorSP(RobotMap.drivetrainLF);
+  public VictorSP rightFront = new VictorSP(RobotMap.drivetrainRF);
+  public VictorSP leftBack = new VictorSP(RobotMap.drivetrainLB);
+  public VictorSP rightBack = new VictorSP(RobotMap.drivetrainRB);
+
+  public void tankDrive(double leftSpeed, double rightSpeed) {
+    leftFront.set(leftSpeed);
+    rightFront.set(rightSpeed);
+    leftBack.set(leftSpeed);
+    rightBack.set(rightSpeed);
+  }
+
+  public void arcadeDrive(double forward, double rotate) {
+    leftFront.set(forward + rotate);
+    rightFront.set(forward - rotate);
+    leftBack.set(forward + rotate);
+    rightBack.set(forward - rotate);
+  }
 
   @Override
   public void initDefaultCommand() {

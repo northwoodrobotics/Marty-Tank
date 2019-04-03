@@ -14,6 +14,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.TeleDrive;
 import frc.robot.subsystems.Drivetrain;
+import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.XboxController;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -23,8 +26,8 @@ import frc.robot.subsystems.Drivetrain;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static Drivetrain m_subsystem = new Drivetrain();
-  public static OI m_oi;
+  public final Drivetrain drivetrain = new Drivetrain();
+  public final OI m_oi = new OI();
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -35,8 +38,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    m_oi = new OI();
-    m_chooser.setDefaultOption("Default Auto", new TeleDrive());
+    m_chooser.setDefaultOption("Default Auto", new TeleDrive(drivetrain));
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
   }
