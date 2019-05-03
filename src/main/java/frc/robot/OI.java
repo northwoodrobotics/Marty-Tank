@@ -15,6 +15,18 @@ import edu.wpi.first.wpilibj.XboxController;
  */
 public class OI {
   public static final XboxController xbox = new XboxController(0);
+
+  public static double deadband(double input) {
+    double output = 0;
+    double radius = 0.1;
+    if (input > radius) {
+      output = ((1 / (1 - radius) * (input - 1)) + 1);
+    } else if (input < radius) {
+      output = ((1 / (1 - radius) * (input + 1)) - 1);
+    }
+    return output;
+
+  };
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
   //// joystick.
