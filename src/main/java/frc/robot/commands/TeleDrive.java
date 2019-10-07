@@ -34,12 +34,12 @@ public class TeleDrive extends Command {
   @Override
   protected void execute() {
     // this is tank
-    // teleDriveDrivetrain.tankDrive(-OI.xbox.getY(Hand.kLeft),
-    // -OI.xbox.getY(Hand.kRight));
+     teleDriveDrivetrain.tankDrive(-OI.xbox.getY(Hand.kLeft),
+    OI.xbox.getY(Hand.kRight));
 
     // this is arcade
-    teleDriveDrivetrain.arcadeDrive(OI.deadband(-OI.xbox.getY(Hand.kLeft)),
-        OI.deadband(OI.xbox.getX(Hand.kRight)) * (1 - (Math.abs(OI.deadband(OI.xbox.getY(Hand.kLeft)) * 0.5))));
+    //teleDriveDrivetrain.arcadeDrive(OI.deadband(-OI.xbox.getY(Hand.kLeft)),
+      //  OI.deadband(OI.xbox.getX(Hand.kRight)) * (1 - (Math.abs(OI.deadband(OI.xbox.getY(Hand.kLeft)) * 0.5))));
   }
 
   // Make this return true when this Command no longer needs to run execute()
