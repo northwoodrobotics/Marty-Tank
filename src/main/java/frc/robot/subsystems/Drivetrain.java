@@ -26,6 +26,11 @@ public class Drivetrain extends Subsystem {
     rightFront.set(rightSpeed);
     leftBack.set(leftSpeed);
     rightBack.set(rightSpeed);
+    
+    leftFront.setInverted(RobotMap.lfInverted);
+		rightFront.setInverted(RobotMap.rfInverted);
+		leftBack.setInverted(RobotMap.lbInverted);
+		rightBack.setInverted(RobotMap.rbInverted);
   }
 
   public void arcadeDrive(double forward, double rotate) {
