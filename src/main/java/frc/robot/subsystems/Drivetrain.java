@@ -20,6 +20,11 @@ public class Drivetrain extends Subsystem {
   public VictorSP rightFront = new VictorSP(RobotMap.drivetrainRF);
   public VictorSP leftBack = new VictorSP(RobotMap.drivetrainLB);
   public VictorSP rightBack = new VictorSP(RobotMap.drivetrainRB);
+	
+  leftFront.setInverted(RobotMap.lfInverted);
+  rightFront.setInverted(RobotMap.rfInverted);
+  leftBack.setInverted(RobotMap.lbInverted);
+  rightBack.setInverted(RobotMap.rbInverted);
 
   public void tankDrive(double leftSpeed, double rightSpeed) {
     leftFront.set(leftSpeed);
@@ -27,10 +32,6 @@ public class Drivetrain extends Subsystem {
     leftBack.set(leftSpeed);
     rightBack.set(rightSpeed);
     
-    leftFront.setInverted(RobotMap.lfInverted);
-		rightFront.setInverted(RobotMap.rfInverted);
-		leftBack.setInverted(RobotMap.lbInverted);
-		rightBack.setInverted(RobotMap.rbInverted);
   }
 
   public void arcadeDrive(double forward, double rotate) {
