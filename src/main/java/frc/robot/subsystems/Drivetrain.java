@@ -17,23 +17,25 @@ import frc.robot.commands.TeleDrive;
  */
 public class Drivetrain extends Subsystem {
 	
-public void init(){
+
   public VictorSP leftFront = new VictorSP(RobotMap.drivetrainLF);
   public VictorSP rightFront = new VictorSP(RobotMap.drivetrainRF);
   public VictorSP leftBack = new VictorSP(RobotMap.drivetrainLB);
   public VictorSP rightBack = new VictorSP(RobotMap.drivetrainRB);
 	
-  leftFront.setInverted(RobotMap.lfInverted);
-  rightFront.setInverted(RobotMap.rfInverted);
-  leftBack.setInverted(RobotMap.lbInverted);
-  rightBack.setInverted(RobotMap.rbInverted);
-}
+
+
 
   public void tankDrive(double leftSpeed, double rightSpeed) {
     leftFront.set(leftSpeed);
     rightFront.set(rightSpeed);
     leftBack.set(leftSpeed);
     rightBack.set(rightSpeed);
+
+    leftFront.setInverted(RobotMap.lfinverted);
+    rightFront.setInverted(RobotMap.rfinverted);
+    leftBack.setInverted(RobotMap.lbinverted);
+    rightBack.setInverted(RobotMap.rbinverted);
     
   }
 
