@@ -1,8 +1,12 @@
-/*----------------------------------------------------------------------------*/
+ /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
+/* the project.   
+
+                        CODE FOR ROBOLOLA
+
+*/
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
@@ -14,9 +18,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.TeleDrive;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Frontwaver;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.Compressor;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -27,7 +33,9 @@ import edu.wpi.first.wpilibj.XboxController;
  */
 public class Robot extends TimedRobot {
   public final Drivetrain drivetrain = new Drivetrain();
-  public final OI m_oi = new OI();
+  public final OI m_oi = new OI(this);
+  public final Frontwaver frontwaver = new Frontwaver();
+  public final Compressor compressor = new Compressor();
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -41,6 +49,8 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", new TeleDrive(drivetrain));
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
+    compressor.start();
+
   }
 
   /**

@@ -8,6 +8,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.Togglewaver;
+import frc.robot.subsystems.Frontwaver;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -15,7 +18,11 @@ import edu.wpi.first.wpilibj.XboxController;
  */
 public class OI {
   public static final XboxController xbox = new XboxController(0);
+  public static final JoystickButton xboxA = new JoystickButton(xbox,1);
 
+  public OI(Robot robot) {
+    xboxA.whenPressed(new Togglewaver(robot.frontwaver));
+  }
   public static double deadband(double input) {
     double output = 0;
     double radius = 0.1;
