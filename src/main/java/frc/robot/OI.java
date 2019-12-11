@@ -7,7 +7,11 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.TogglePuncher;
+import frc.robot.subsystems.FrontPuncher;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -15,18 +19,25 @@ import edu.wpi.first.wpilibj.XboxController;
  */
 public class OI {
   public static final XboxController xbox = new XboxController(0);
+  public static final JoystickButton xboxA = new JoystickButton(xbox, 1);
+
+  public OI(Robot robot) {
+
+    xboxA.whenPressed(new TogglePuncher(robot.frontPuncher));
+
+  }
 
   public static double deadband(double input) {
     double output = 0;
-    double radius = 0.1;
-    if (input > radius) {
-      output = ((1 / (1 - radius) * (input - 1)) + 1);
-    } else if (input < radius) {
-      output = ((1 / (1 - radius) * (input + 1)) - 1);
+    double radius = 0.2;
+    if (input >= radius) {
+      output = (((1 / (1 - radius)) * (input - 1)) + 1);
+    } else if (input <= -radius) {
+      output = (((1 / (1 - radius)) * (input + 1)) - 1);
     }
     return output;
+  }
 
-  };
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
   //// joystick.

@@ -7,22 +7,26 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.FrontPuncher;
 
 /**
  * An example command. You can replace me with your own command.
  */
-public class TeleDrive extends Command {
-  private Drivetrain teleDriveDrivetrain;
+public class TogglePuncher extends Command {
+  private FrontPuncher frontPuncher;
 
-  public TeleDrive(Drivetrain rintaro) {
+  public TogglePuncher(FrontPuncher marty) {
     // Use requires() here to declare subsystem dependencies
-    teleDriveDrivetrain = rintaro;
-    requires(teleDriveDrivetrain);
+    frontPuncher = marty;
+    requires(frontPuncher);
+  }
+
+  public TogglePuncher() {
   }
 
   // Called just before this Command runs the first time
@@ -33,24 +37,25 @@ public class TeleDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    // this is tank
-    // teleDriveDrivetrain.tankDrive(-OI.xbox.getY(Hand.kLeft),
-    // -OI.xbox.getY(Hand.kRight));
 
-    // this is arcade
-    teleDriveDrivetrain.arcadeDrive(OI.deadband(-OI.xbox.getY(Hand.kLeft)),
-        OI.deadband(OI.xbox.getX(Hand.kRight)) * (1 - (Math.abs(OI.deadband(OI.xbox.getY(Hand.kLeft)) * 0.5))));
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    if (frontPuncher.getPosition() == Value.kForward) {
+      frontPuncher.unpunchPaul();
+      System.out.println("punching Paul");
+    } else {
+      frontPuncher.punchPaul();
+      System.out.println("unpunching Paul");
+    }
   }
 
   // Called when another command which requires one or more of the same

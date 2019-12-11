@@ -14,8 +14,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.TeleDrive;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.FrontPuncher;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.XboxController;
 
 /**
@@ -27,7 +29,12 @@ import edu.wpi.first.wpilibj.XboxController;
  */
 public class Robot extends TimedRobot {
   public final Drivetrain drivetrain = new Drivetrain();
-  public final OI m_oi = new OI();
+  public final Compressor compressor = new Compressor();
+  public final FrontPuncher frontPuncher = new FrontPuncher();
+
+  public final OI oi = new OI(this);
+
+  // classic Vinyl bohemianRhapsody = new Vinyl(Queen);
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -41,6 +48,8 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", new TeleDrive(drivetrain));
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
+    compressor.start();
+
   }
 
   /**
