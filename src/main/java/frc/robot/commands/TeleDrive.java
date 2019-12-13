@@ -34,8 +34,7 @@ public class TeleDrive extends Command {
   @Override
   protected void execute() {
     // this is tank
-    // teleDriveDrivetrain.tankDrive(-OI.xbox.getY(Hand.kLeft),
-    // -OI.xbox.getY(Hand.kRight));
+    teleDriveDrivetrain.tankDrive(-OI.xbox.getY(Hand.kLeft), OI.xbox.getY(Hand.kRight));
 
     // this is arcade
     teleDriveDrivetrain.arcadeDrive(OI.deadband(-OI.xbox.getY(Hand.kLeft)),
